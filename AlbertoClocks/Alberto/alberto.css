@@ -1,0 +1,76 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+nav{
+    background-color:  rgba(129, 30, 0, 0.651) ;
+}
+
+.navbar-brand h4{
+   text-align: center;
+    display: inline;
+    
+    color: black;
+    font-size: 35px;
+    position: absolute;
+}
+.watches{
+    width: 100%;
+    justify-content: center;
+}
+
+.watches .watchscont{
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 50px;
+}
+
+.card{
+    margin-left: 80px;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+}
+
+.card:hover{
+   box-shadow:  4px 5px 10px rgb(161, 60, 29);
+    transform: translateY(20px);
+    border-radius: 20px;
+    
+}
+
+.product{
+  
+    border-bottom: 1px solid rgba(161, 60, 29, 0.192);
+    margin-top: 5px;
+    text-align: center;
+}
+
+.card-text{
+  font-weight: bolder;
+  font-size: 30px;
+}
+
+a.btn{
+    margin-left: 120px;
+    background-color: rgb(165, 71, 42);
+    border: solid rgb(161, 60, 29);
+}
+
+a.btn:hover{
+    background-color:  rgb(85, 30, 14) ;
+    border: solid  rgb(58, 17, 5);
+}
+
+hr{
+    background-color: rgba(161, 60, 29, 0.192);
+}
+
+
+
+
+
+
+
+    

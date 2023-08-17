@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  	 <link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="angular.min-1.8.2.js"/></script>
+	<script src="angular-route.js"/></script>
+	<link rel="stylesheet" href="alberto.css">
+  <link rel="stylesheet" href="alberto/alberto.css">	
+    <script src="albertoclock.js"></script>
+    <title>Alberto Clock</title>
+</head>
+  <body ng-controller="appController">
+    <section class="top-menu bg-dark">	
+     <nav class="navbar navbar-expand-sm navbar-dark bg-goldenrod p-0">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <span style="color:goldenrod; font-size: 10px;">Number of visitors :{{visitcount}}</span>
+	  <img src="images/IMG-20230112-WA0012.jpg" style="width: 20%;">
+	  </a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">       
+          <li class="nav-item px-2">
+            <a href="#/!" class="nav-link fa fa-home" aria-hidden="true"> Home</a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="#!aboutus" class="nav-link">About Us</a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="#!contactus" class="nav-link">Contact Us</a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="#!gallery" class="nav-link">Gallery</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown mr-3">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-product-hunt"></i> Products</a>
+            <div class="dropdown-menu">
+              <a href="#!rolex" class="dropdown-item">
+                <i class="fa fa-clock-o"></i> Rolex Watch</a>
+              <a href="#!michaelkors" class="dropdown-item">
+                <i class="fa fa-clock-o"></i> Michael Kors</a>
+			        <a href="#!hublot" class="dropdown-item">
+                <i class="fa fa-clock-o"></i> Hublot</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>        
+    </section>
+	
+    <div ng-view></div>
+    <section class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#!aboutus">About Us</a></li>
+              <li><a href="#!">Our Services</a></li>
+              <li><a href="#!gallery">Gallery</a></li>
+              <li><a href="#">Product</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Get help</h4>
+            <ul>
+              <li><a href="#!contactus">Contact Us</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Order Status</a></li>
+              <li><a href="#">Payment Options</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Online shop</h4>
+            <ul>
+              <li><a href="#!hublot">Watches</a></li>
+              <li><a href="#!michaelkors">Luxury</a></li>
+              <li><a href="#!rolex">Vintage</a></li>
+              <li><a href="#!">Smartwatch</a></li>
+            </ul>
+          </div>
+      
+          <div class="footer-col">
+            <h4>Follow us</h4>
+            <div class="social-links">
+              <a href="#"><i class="fa fa-facebook"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"><i class="fa fa-envelope-o"></i></a>
+            </div>      
+          </div>
+        </div>
+      </div>
+      <hr class="ho-rizon" color="#555">
+      <marquee width="60%" direction="left" height="100px" style="color: goldenrod;">&copy;2023 AlbertoClocks &nbsp;&nbsp;&nbsp;{{datestr}}
+     </marquee>
+    </section>
+    <!---->
+   <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+        var app = angular.module("myApp",["ngRoute"]);
+        app.controller("appController",["$scope","$interval",function($scope, $interval) {
+            $scope.date = new Date(Date.now());
+              $scope.datestr = $scope.date.getFullYear() + "-" + ($scope.date.getMonth() + 1) + "-" + $scope.date.getDate();
+              $scope.visitcount = 0;
+              $interval(()=>{
+                $scope.date = new Date(Date.now());
+              $scope.datestr = $scope.date.getFullYear() + "-" + ($scope.date.getMonth() + 1) + "-" + $scope.date.getDate();
+             },1000)
+            $scope.visitcount = 0;
+            if(localStorage){
+              if(localStorage.getItem("countvisit")){
+                $scope.visitcount = parseInt(localStorage.getItem("countvisit"))+1;
+                localStorage.setItem("countvisit",$scope.visitcount);
+              }
+              else{
+                $scope.visitcount = 1;
+                localStorage.setItem("countvisit",$scope.visitcount);
+              }
+            }
+        }]);
+		app.config(function ($routeProvider){ 
+
+            $routeProvider
+				.when("/", {
+                    templateUrl:"home.html"
+
+                })                
+				.when("/aboutus", { 
+
+                    templateUrl: "aboutus.html"
+                    
+
+                })
+                
+                .when("/contactus", { 
+
+              templateUrl: "contactus.html"
+
+
+            })
+
+            .when("/gallery", { 
+
+templateUrl: "gallery.html"
+
+
+})
+
+              .when("/rolex", { 
+
+            templateUrl: "rolex.html"
+
+
+        })
+        .when("/michaelkors", { 
+
+templateUrl: "michaelkors.html"
+
+
+})
+
+.when("/hublot", { 
+
+templateUrl: "hublot.html"
+
+
+})
+        });
+    </script>
+
+
+        </body>
+</html>
